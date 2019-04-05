@@ -292,10 +292,12 @@ class ServerHelper extends PluginBase{
                             if($target == true){
                                 if(!$target->getAllowFlight()){
                                     $target->setAllowFlight(true);
+                                    $target->setFlying(true);
                                     $target->sendMessage($prefix . $this->getLang("message.fly.target.on"));
                                 }else{
                                     if($target->getAllowFlight()){
                                         $target->setAllowFlight(false);
+                                        $target->setFlying(false);
                                         $target->sendMessage($prefix . $this->getLang("message.fly.target.off"));
                                     }
                                 }
@@ -306,10 +308,12 @@ class ServerHelper extends PluginBase{
                         if(empty($args[0])){
                             if(!$sender->getAllowFlight()){
                                 $sender->setAllowFlight(true);
+                                $sender->setFlying(true);
                                 $sender->sendMessage($prefix . $this->getLang("message.fly.self.on"));
                             }else{
                                 if($sender->getAllowFlight()){
                                     $sender->setAllowFlight(false);
+                                    $sender->setFlying(false);
                                     $sender->sendMessage($prefix . $this->getLang("message.fly.self.off"));
                                 }
                             }
