@@ -23,12 +23,12 @@ class EventListener implements Listener {
 		if ($attacker->isFlying()) {
 			$attacker->setFlying(false);
 			$attacker->setAllowFlight(false);
-			$attacker->sendMessage(Main::PREFIX . "§c Flight mode have been disabled due to entering combat");
+			$attacker->sendMessage("§c Flight mode have been disabled due to entering combat");
 		}
 		if ($entity->isFlying()) {
 			$entity->setFlying(false);
 			$entity->setAllowFlight(false);
-			$entity->sendMessage(Main::PREFIX . "§c Flight mode have been disabled due to entering combat");
+			$entity->sendMessage("§c Flight mode have been disabled due to entering combat");
 		}
 		return true;
 	}
