@@ -29,6 +29,7 @@ use pocketmine\entity\Effect;
 use pocketmine\entity\EffectInstance;
 use pocketmine\utils\Config;
 use pocketmine\math\Vector3;
+use ServerHelper\EventListener;
 
 
 class ServerHelper extends PluginBase{
@@ -84,6 +85,9 @@ class ServerHelper extends PluginBase{
         $this->getLogger()->info(SH::GREEN . $this->getLang("message.logger.choosen.lang") . $langselected . " §eID: §7" . $langid);
         $this->getLogger()->info(SH::GREEN . $this->getLang("message.logger.addons"));
 
+        //REGISTER EVENTS\\
+        $this->getServer()->getPluginManager()->registerEvents(new EventListener($this), $this);
+        
         //SEND ADDON INFO\\
         if($addon_soupffa == true){
             $this->getLogger()->info($this->getLang("message.logger.addonfound") . " §7SoupFFA-PME");
