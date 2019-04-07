@@ -634,14 +634,12 @@ class ServerHelper extends PluginBase{
                             $target = $this->getServer()->getPlayer($args[1]);
                             if($target == true){
                                 if($args[0] == "on") {
-                                    $target->setDisplayName(" ");
                                     $target->addEffect(new EffectInstance(Effect::getEffect(Effect::NIGHT_VISION), (99999999 * 20), (1), (false)));
                                     $target->addEffect(new EffectInstance(Effect::getEffect(Effect::INVISIBILITY), (99999999 * 20), (1), (false)));
                                     $target->sendMessage($prefix . $this->getLang("message.vanished.true"));
                                     return true;
                                 }
                                 if($args[0] == "off"){
-                                    $target->setDisplayName(" ");
                                     $target->removeEffect(Effect::INVISIBILITY);
                                     $target->removeEffect(Effect::NIGHT_VISION);
                                     $target->sendMessage($prefix . $this->getLang("message.vanished.false"));
@@ -664,7 +662,6 @@ class ServerHelper extends PluginBase{
                                 return true;
                             }
                             if($args[0] == "on"){
-                                $sender->setDisplayName(" ");
                                 $sender->addEffect(new EffectInstance(Effect::getEffect(Effect::NIGHT_VISION), (99999999*20), (1), (false)));
                                 $sender->addEffect(new EffectInstance(Effect::getEffect(Effect::INVISIBILITY), (99999999*20), (1), (false)));
                                 $sender->sendMessage($prefix . $this->getLang("message.vanished.true"));
