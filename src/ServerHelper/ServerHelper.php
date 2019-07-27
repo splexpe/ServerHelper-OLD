@@ -265,24 +265,11 @@ class ServerHelper extends PluginBase{
             case "feed":
                 if($sender instanceof Player){
                     if($sender->hasPermission("serverhelper.command.feed")){
-                        if(!empty($args[0])){
-                            $target = $this->getServer()->getPlayer($args[0]);
-                            if($target == true){
-                                $target->setFood(20);
-                                $target->sendMessage($prefix . $this->getLang("message.feed.target.part1") . $sender->getName() . $this->getLang("message.feed.target.part2"));
-                                $sender->sendMessage($prefix . $this->getLang("message.feed.sender.part1") . $target->getDisplayName() . $this->getLang("message.feed.sender.part2"));
-                            }
-                            if($target == null){
-                                $sender->sendMessage($prefix . $this->getLang("message.warning.noplayerfound"));
-                            }
-                        }
-                        if(empty($args[0])){
-                            $sender->setFood(20);
-                            $sender->sendMessage($prefix . $this->getLang("message.feed.self"));
+                       $sender->setFood(20);
+                       $sender->sendMessage($prefix . $this->getLang("message.feed.self"));
                         }
                     }else{
                         $sender->sendMessage($prefix . $this->getLang("message.warning.noperm"));
-                    }
                 }else{
                     $sender->sendMessage($prefix . $this->getLang("message.warning.onlyplayers"));
                 }
@@ -290,25 +277,7 @@ class ServerHelper extends PluginBase{
 
             case "fly":
                 if($sender instanceof Player){
-                    if($sender->hasPermission("serverhelper.commands.fly")) {
-                        if(!empty($args[0])){
-                            $target = $this->getServer()->getPlayer($args[0]);
-                            if($target == true){
-                                if(!$target->getAllowFlight()){
-                                    $target->setAllowFlight(true);
-                                    $target->setFlying(true);
-                                    $target->sendMessage($prefix . $this->getLang("message.fly.target.on"));
-                                }else{
-                                    if($target->getAllowFlight()){
-                                        $target->setAllowFlight(false);
-                                        $target->setFlying(false);
-                                        $target->sendMessage($prefix . $this->getLang("message.fly.target.off"));
-                                    }
-                                }
-                            }else{
-                                $sender->sendMessage($prefix . $this->getLang("message.warning.noplayerfound"));
-                            }
-                        }
+                    if($sender->hasPermission("serverhelper.command.fly")) {
                         if(empty($args[0])){
                             if(!$sender->getAllowFlight()){
                                 $sender->setAllowFlight(true);
@@ -411,17 +380,6 @@ class ServerHelper extends PluginBase{
             case "gmsp":
                 if($sender instanceof Player){
                     if($sender->hasPermission("serverhelper.command.gmsp")){
-                        if(!empty($args[0])){
-                            $target = $this->getServer()->getPlayer($args[0]);
-                            if($target == true){
-                                $target->setGameMode(3);
-                                $target->sendMessage($prefix . $this->getLang("message.gamemode.part1") . $this->getLang("message.gamemode.spectator"));
-                                $sender->sendMessage($prefix . $this->getLang("message.gamemode.sender.part1") . $target->getDisplayName() . $this->getLang("message.gamemode.sender.part2") . $this->getLang("message.gamemode.spectator"));
-                            }
-                            if($target == null){
-                                $sender->sendMessage($prefix . $this->getLang("message.warning.noplayerfound"));
-                            }
-                        }
                         if(empty($args[0])){
                             $sender->setGameMode(3);
                             $sender->sendMessage($prefix . $this->getLang("message.gamemode.part1") . "Spectator" . SH::GRAY . "!");
@@ -436,18 +394,7 @@ class ServerHelper extends PluginBase{
 
             case "heal":
                 if($sender instanceof Player){
-                    if($sender->hasPermission("serverhelper.commands.heal")){
-                        if(!empty($args[0])){
-                           $target = $this->getServer()->getPlayer($args[0]);
-                           if($target == true){
-                               $target->setHealth($target->getMaxHealth());
-                               $target->sendMessage($prefix . $this->getLang("message.heal.target"));
-                               $sender->sendMessage($prefix . $this->getLang("message.heal.sender.part1") . $target->getDisplayName() . $this->getLang("message.heal.sender.part2"));
-                           }
-                           if($target == null){
-                               $sender->sendMessage($prefix . $this->getLang("message.warning.noplayerfound"));
-                           }
-                        }
+                    if($sender->hasPermission("serverhelper.command.heal")){
                         if(empty($args[0])){
                             $sender->setHealth($sender->getMaxHealth());
                             $sender->sendMessage($prefix . $this->getLang("message.heal.self"));
@@ -462,7 +409,7 @@ class ServerHelper extends PluginBase{
 
             case "itemid":
                 if($sender instanceof Player){
-                    if($sender->hasPermission("serverhelper.commands.itemid")){
+                    if($sender->hasPermission("serverhelper.command.itemid")){
                         $item = $sender->getInventory()->getItemInHand();
                         $sender->sendMessage($prefix . $this->getLang("message.itemid") . $item->getID());
                     }else{
