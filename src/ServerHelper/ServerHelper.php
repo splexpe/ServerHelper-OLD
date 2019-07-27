@@ -44,10 +44,10 @@ class ServerHelper extends PluginBase{
         @mkdir($this->getDataFolder());
         $this->cfg = new Config($this->getDataFolder() . "config.yml", Config::YAML);
 
-            $this->saveResource("lang/English.yml");
-            $this->saveResource("lang/Deutsch.yml");
-            $this->saveResource("lang/Dütsch.yml");
-            $this->saveResource("lang/Italiano.yml");
+        $this->saveResource("lang/English.yml");
+        $this->saveResource("lang/Deutsch.yml");
+        $this->saveResource("lang/Dütsch.yml");
+        $this->saveResource("lang/Italiano.yml");
 
         $language = $this->cfg->get("Language");
         if(!is_file($this->getDataFolder() . "lang/{$language}.yml")){
@@ -87,7 +87,7 @@ class ServerHelper extends PluginBase{
 
         //REGISTER EVENTS\\
         $this->getServer()->getPluginManager()->registerEvents(new EventListener($this), $this);
-        
+
         //SEND ADDON INFO\\
         if($addon_soupffa == true){
             $this->getLogger()->info($this->getLang("message.logger.addonfound") . " §7SoupFFA-PME");
@@ -265,15 +265,17 @@ class ServerHelper extends PluginBase{
             case "feed":
                 if($sender instanceof Player){
                     if($sender->hasPermission("serverhelper.command.feed")){
-                       $sender->setFood(20);
-                       $sender->sendMessage($prefix . $this->getLang("message.feed.self"));
-                        }
-                    }else{
-                        $sender->sendMessage($prefix . $this->getLang("message.warning.noperm"));
-                }else{
-                    $sender->sendMessage($prefix . $this->getLang("message.warning.onlyplayers"));
+                        if(empty($args[0])){
+                        $sender->setFood(20);
+                        $sender->sendMessage($prefix . $this->getLang("message.feed.self"));
+                    }
+                }else {
+                    $sender->sendMessage($prefix . $this->getLang("message.warning.noperm"));
                 }
-                return true;
+            }else{
+                $sender->sendMessage($prefix . $this->getLang("message.warning.onlyplayers"));
+            }
+            return true;
 
             case "fly":
                 if($sender instanceof Player){
@@ -692,29 +694,29 @@ class ServerHelper extends PluginBase{
                     }
                 }
                 if(empty($args[0])){
-                        $sender->sendMessage($this->getLang("message.help.CommandList"));
-                        $sender->sendMessage($this->getLang("message.help.wantseealiases"));
-                        $sender->sendMessage(SH::GREEN . "/shhelp" . SH::GRAY . " » " . $this->getLang("message.help.shhelp"));
-                        $sender->sendMessage(SH::GREEN . "/fly" . SH::GRAY . " » " . $this->getLang("message.help.fly"));
-                        $sender->sendMessage(SH::GREEN . "/feed" . SH::GRAY . " » " . $this->getLang("message.help.feed"));
-                        $sender->sendMessage(SH::GREEN . "/heal" . SH::GRAY . " » " . $this->getLang("message.help.heal"));
-                        $sender->sendMessage(SH::GREEN . "/broadcast" . SH::GRAY . " » " . $this->getLang("message.help.broadcast"));
-                        $sender->sendMessage(SH::GREEN . "/test" . SH::GRAY . " » " . $this->getLang("message.help.test"));
-                        $sender->sendMessage(SH::GREEN . "/nickname" . SH::GRAY . " » " . $this->getLang("message.help.nickname"));
-                        $sender->sendMessage(SH::GREEN . "/vanish" . SH::GRAY . " » " . $this->getLang("message.help.vanish"));
-                        $sender->sendMessage(SH::GREEN . "/gmc" . SH::GRAY . " » " . $this->getLang("message.help.gmc"));
-                        $sender->sendMessage(SH::GREEN . "/gma" . SH::GRAY . " » " . $this->getLang("message.help.gma"));
-                        $sender->sendMessage(SH::GREEN . "/gms" . SH::GRAY . " » " . $this->getLang("message.help.gms"));
-                        $sender->sendMessage(SH::GREEN . "/gmsp" . SH::GRAY . " » " . $this->getLang("message.help.gmsp"));
-                        $sender->sendMessage(SH::GREEN . "/day" . SH::GRAY . " » " . $this->getLang("message.help.day"));
-                        $sender->sendMessage(SH::GREEN . "/night" . SH::GRAY . " » " . $this->getLang("message.help.night"));
-                        $sender->sendMessage(SH::GREEN . "/clear" . SH::GRAY . " » " . $this->getLang("message.help.clear"));
-                        $sender->sendMessage(SH::GREEN . "/cleararmor" . SH::GRAY . " » " . $this->getLang("message.help.cleararmor"));
-                        $sender->sendMessage(SH::GREEN . "/itemid" . SH::GRAY . " » " . $this->getLang("message.help.itemid"));
-                        $sender->sendMessage(SH::GREEN . "/tstop" . SH::GRAY . " » " . $this->getLang("message.help.tstop"));
-                        $sender->sendMessage(SH::GREEN . "/aboutsh" . SH::GRAY . " » " . $this->getLang("message.help.about"));
-                        $sender->sendMessage(SH::GREEN . "/playersize" . SH::GRAY . " » " . $this->getLang("message.help.size"));
-                    }
+                    $sender->sendMessage($this->getLang("message.help.CommandList"));
+                    $sender->sendMessage($this->getLang("message.help.wantseealiases"));
+                    $sender->sendMessage(SH::GREEN . "/shhelp" . SH::GRAY . " » " . $this->getLang("message.help.shhelp"));
+                    $sender->sendMessage(SH::GREEN . "/fly" . SH::GRAY . " » " . $this->getLang("message.help.fly"));
+                    $sender->sendMessage(SH::GREEN . "/feed" . SH::GRAY . " » " . $this->getLang("message.help.feed"));
+                    $sender->sendMessage(SH::GREEN . "/heal" . SH::GRAY . " » " . $this->getLang("message.help.heal"));
+                    $sender->sendMessage(SH::GREEN . "/broadcast" . SH::GRAY . " » " . $this->getLang("message.help.broadcast"));
+                    $sender->sendMessage(SH::GREEN . "/test" . SH::GRAY . " » " . $this->getLang("message.help.test"));
+                    $sender->sendMessage(SH::GREEN . "/nickname" . SH::GRAY . " » " . $this->getLang("message.help.nickname"));
+                    $sender->sendMessage(SH::GREEN . "/vanish" . SH::GRAY . " » " . $this->getLang("message.help.vanish"));
+                    $sender->sendMessage(SH::GREEN . "/gmc" . SH::GRAY . " » " . $this->getLang("message.help.gmc"));
+                    $sender->sendMessage(SH::GREEN . "/gma" . SH::GRAY . " » " . $this->getLang("message.help.gma"));
+                    $sender->sendMessage(SH::GREEN . "/gms" . SH::GRAY . " » " . $this->getLang("message.help.gms"));
+                    $sender->sendMessage(SH::GREEN . "/gmsp" . SH::GRAY . " » " . $this->getLang("message.help.gmsp"));
+                    $sender->sendMessage(SH::GREEN . "/day" . SH::GRAY . " » " . $this->getLang("message.help.day"));
+                    $sender->sendMessage(SH::GREEN . "/night" . SH::GRAY . " » " . $this->getLang("message.help.night"));
+                    $sender->sendMessage(SH::GREEN . "/clear" . SH::GRAY . " » " . $this->getLang("message.help.clear"));
+                    $sender->sendMessage(SH::GREEN . "/cleararmor" . SH::GRAY . " » " . $this->getLang("message.help.cleararmor"));
+                    $sender->sendMessage(SH::GREEN . "/itemid" . SH::GRAY . " » " . $this->getLang("message.help.itemid"));
+                    $sender->sendMessage(SH::GREEN . "/tstop" . SH::GRAY . " » " . $this->getLang("message.help.tstop"));
+                    $sender->sendMessage(SH::GREEN . "/aboutsh" . SH::GRAY . " » " . $this->getLang("message.help.about"));
+                    $sender->sendMessage(SH::GREEN . "/playersize" . SH::GRAY . " » " . $this->getLang("message.help.size"));
+                }
                 return true;
         }
         return false;
